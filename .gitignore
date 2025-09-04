@@ -1,0 +1,7 @@
+# 제외할 파일 및 폴더
+*.txt
+settings.json
+tasks.json
+.vscode/
+.DS_Store
+tempCodeRunnerFile.cpp
