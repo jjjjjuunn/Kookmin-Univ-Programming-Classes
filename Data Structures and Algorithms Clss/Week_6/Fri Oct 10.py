@@ -1,5 +1,6 @@
 # 단순 연결 리스트
-
+# head만 해서 구현한 건 stack버전으로 바꿔보기 - 중간고사 대비
+# head, tail 해서 구현한 건 큐 버전으로 바꿔보기 - 중간고사 대비 
 class SNode:
     def __init__(self, data):
         self.__data = data
@@ -14,10 +15,10 @@ class SNode:
         self.__link = link
 
 class SLinkedList:
-    def __init__(self):
-        self.__head = None
-        # self.__tail = None
-        # self.__count = 0
+    def __init__(self):         # 생성자
+        self.__head = None      # 첫 번째 노드
+        self.__tail = None    # 맨 마지막 노드
+        self.__count = 0      # 노드의 총 개수
 
     def __del__(self):
         while not self.isEmpty():
@@ -29,18 +30,21 @@ class SLinkedList:
         return self.__head == None
     
     def countNode(self) -> int:
+        '''
         count = 0
         rNode = self.__head
         while rNode:
             count += 1
             rNode = rNode.getLink()
         return count
+        '''
+        return self.__count
     
     def frontNode(self) -> SNode:
         return self.__head
     
     def rearNode(self) -> SNode:
-        
+        '''
         if self.isEmpty():
             return None
         rNode = self.__head
@@ -48,14 +52,18 @@ class SLinkedList:
         while rNode.getLink():
             rNode = rNode.getLink()
         return rNode
+        '''
+        return self.__tail
     
     def addRear(self, num) -> None:
         newNode = SNode(num)
         if self.isEmpty():
             self.__head = newNode
         else:
-            rNode = self.rearNode()
-            rNode.setLink(newNode)
+            self.__tail.setLink(newNode)
+
+        self.__tail = newNode
+        self.__count += 1
     
     def removeFront(self) -> None:
         if self.isEmpty():
@@ -63,8 +71,12 @@ class SLinkedList:
         
         old = self.__head
         self.__head = old.getLink()
-
+        
+        if self.__head is None:
+            self.__tail = None
+        
         del old
+        self.__count -= 1
     
     def printLinkedList(self) -> None:
         if self.isEmpty():
