@@ -25,6 +25,7 @@ class SLinkedList:
             old = self.__head
             self.__head = old.getLink()
             del old
+            self.__count -= 1
 
     def isEmpty(self) -> bool:
         return self.__head == None
